@@ -1,3 +1,7 @@
+import os
+os.environ["HF_HOME"] = "/home/lukewang/.cache/huggingface"
+os.environ["TRANSFORMERS_CACHE"] = "/home/lukewang/.cache/huggingface"
+
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model_name = "Qwen/Qwen3-14B"
@@ -8,11 +12,12 @@ inputjson = 'data.json'
 llm = 'llama3.1:8b'
 systempromptfile = 'systemprompt.txt'
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/home/lukewang/.cache/huggingface")
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     dtype="auto",
-    device_map="auto"
+    device_map="auto", 
+    ache_dir="/home/lukewang/.cache/huggingface"
 )
 
 try:
